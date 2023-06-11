@@ -15,4 +15,7 @@
   .secondary-btn {
     @apply my-1 bg-transparent border border-primary text-primary;
   }
+  .error-text {
+    @apply mb-2 text-[10px] text-left text-red-500 font-medium
+  }
 }

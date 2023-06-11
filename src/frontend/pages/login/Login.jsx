@@ -1,6 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { mobilePost } from "../../assets";
 import { PasswordInput } from "../../components";
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  username: Yup.string().required("Username is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,10 +22,41 @@ const Login = () => {
           <p className="mb-5 font-caveat text-3xl font-bold">
             Artist's Showcase
           </p>
-          <input type="text" placeholder="Username" />
-          <PasswordInput placeholder={"Password"} />
-          <button>Login</button>
-          <button className="secondary-btn">Login as a Guest</button>
+          <Formik
+            initialValues={{
+              username: "",
+              password: "",
+            }}
+            onSubmit={(values) => {
+              console.log(values);
+            }}
+            validationSchema={validationSchema}
+          >
+            {({ values, errors, touched, handleChange, handleSubmit }) => (
+              <>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={values.username}
+                  onChange={handleChange("username")}
+                />
+                {errors.username && touched.username && (
+                  <p className="error-text">{errors.username}</p>
+                )}
+                <PasswordInput
+                  placeholder={"Password"}
+                  value={values.password}
+                  onChange={handleChange("password")}
+                />
+                {errors.password && touched.password && (
+                  <p className="error-text">{errors.password}</p>
+                )}
+                <button onClick={handleSubmit}>Login</button>
+                <button className="secondary-btn">Login as a Guest</button>
+              </>
+            )}
+          </Formik>
+
           <p className="text-sm my-5" onClick={() => navigate("/signup")}>
             Don't have an account?{" "}
             <span className="text-primary font-semibold">Sign Up</span>
