@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { PasswordInput } from "../../components";
+import { Loader, PasswordInput } from "../../components";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser } from "../../redux/slices/authSlice";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
+  username: Yup.string().required("Username is required"),
   name: Yup.string().required("Full name is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
@@ -16,6 +19,8 @@ const validationSchema = Yup.object().shape({
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.authReducer);
 
   return (
     <div className="flex justify-center h-screen items-center">
@@ -24,26 +29,19 @@ const SignUp = () => {
         <Formik
           initialValues={{
             email: "",
+            username: "",
             name: "",
             password: "",
             confirmPassword: "",
           }}
           onSubmit={(values) => {
-            console.log(values);
+            const { email, name, username, password } = values;
+            dispatch(signupUser({ email, name, username, password }));
           }}
           validationSchema={validationSchema}
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <>
-              <input
-                type="text"
-                placeholder="Email"
-                value={values.email}
-                onChange={handleChange("email")}
-              />
-              {errors.email && touched.email && (
-                <p className="error-text">{errors.email}</p>
-              )}
               <input
                 type="text"
                 placeholder="Full name"
@@ -52,6 +50,24 @@ const SignUp = () => {
               />
               {errors.name && touched.name && (
                 <p className="error-text">{errors.name}</p>
+              )}
+              <input
+                type="text"
+                placeholder="Username"
+                value={values.username}
+                onChange={handleChange("username")}
+              />
+              {errors.username && touched.username && (
+                <p className="error-text">{errors.username}</p>
+              )}
+              <input
+                type="text"
+                placeholder="Email"
+                value={values.email}
+                onChange={handleChange("email")}
+              />
+              {errors.email && touched.email && (
+                <p className="error-text">{errors.email}</p>
               )}
               <PasswordInput
                 placeholder={"Password"}
@@ -81,6 +97,7 @@ const SignUp = () => {
           <span className="text-primary font-semibold">Login</span>
         </p>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { mobilePost } from "../../assets";
-import { PasswordInput } from "../../components";
+import { Loader, PasswordInput } from "../../components";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../redux";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -11,10 +13,12 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.authReducer);
 
   return (
     <div className="flex flex-row items-center justify-evenly flex-wrap">
-      <div class="w-full sm:w-1/2 hidden sm:flex justify-end">
+      <div className="w-full sm:w-1/2 hidden sm:flex justify-end">
         <img src={mobilePost} alt="welcomeImage" className="h-96 px-10" />
       </div>
       <div className="w-full sm:w-1/2 h-screen flex flex-col justify-center items-center sm:items-start sm:h-screen sm:p-10">
@@ -27,9 +31,7 @@ const Login = () => {
               username: "",
               password: "",
             }}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={(values) => dispatch(loginUser(values))}
             validationSchema={validationSchema}
           >
             {({ values, errors, touched, handleChange, handleSubmit }) => (
@@ -63,6 +65,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };
