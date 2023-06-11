@@ -4,10 +4,10 @@
 
 @layer base {
   input {
-    @apply w-full outline-none border my-3 p-2 text-sm;
+    @apply w-full outline-none border my-1 p-2 text-sm;
   }
   button {
-    @apply w-full bg-primary p-2 my-3 text-white font-medium
+    @apply w-full bg-primary p-2 my-3 text-white font-medium text-sm
   }
 }
 
