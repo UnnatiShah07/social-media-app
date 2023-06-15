@@ -3,8 +3,8 @@ import { axiosInstance } from "../../utils";
 
 const initialState = {
   loading: false,
-  token: "",
-  userDetails: {},
+  token: localStorage.getItem("token") ?? "",
+  userDetails: JSON.parse(localStorage.getItem("user")) ?? {},
 };
 
 export const loginUser = createAsyncThunk(

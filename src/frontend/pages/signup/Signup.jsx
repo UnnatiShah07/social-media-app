@@ -36,7 +36,10 @@ const SignUp = () => {
           }}
           onSubmit={(values) => {
             const { email, name, username, password } = values;
-            dispatch(signupUser({ email, name, username, password }));
+            dispatch(signupUser({ email, name, username, password }))
+              .unwrap()
+              .then(() => navigate("/"))
+              .catch(() => {});
           }}
           validationSchema={validationSchema}
         >

@@ -31,7 +31,12 @@ const Login = () => {
               username: "",
               password: "",
             }}
-            onSubmit={(values) => dispatch(loginUser(values))}
+            onSubmit={(values) =>
+              dispatch(loginUser(values))
+                .unwrap()
+                .then(() => navigate("/"))
+                .catch(() => {})
+            }
             validationSchema={validationSchema}
           >
             {({ values, errors, touched, handleChange, handleSubmit }) => (
