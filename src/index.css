@@ -18,4 +18,8 @@
   .error-text {
     @apply mb-2 text-[10px] text-left text-red-500 font-medium
   }
+  .hide-scrollbar::-webkit-scrollbar {
+    width: 0;
+    background-color: "transparent";
+  }
 }

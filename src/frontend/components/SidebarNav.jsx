@@ -3,14 +3,15 @@ import { MdExplore, MdOutlineBookmark } from "react-icons/md";
 import { RiAddCircleFill } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router";
 import NavbarItem from "./NavbarItem";
-// import { HiHeart } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 const SidebarNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { userDetails } = useSelector((state) => state.authReducer);
 
   return (
-    <div className="h-screen w-2/12 border-r hidden sm:flex justify-center items-center">
+    <div className="h-screen w-full border-r hidden sm:flex justify-center items-center">
       <div className="flex flex-col justify-around h-full">
         <div>
           <p className="mb-5 font-caveat text-3xl font-bold">
@@ -46,11 +47,17 @@ const SidebarNav = () => {
         </div>
 
         <div
-          className="flex items-center gap-4"
+          className="flex items-center gap-2"
           onClick={() => navigate("/profile")}
         >
-          <div className="w-10 h-10 rounded-3xl border bg-slate-200"></div>
-          <p>Unnati Shah</p>
+          <div className="w-10 h-10 rounded-3xl border bg-slate-200">
+            <img
+              src={userDetails.profile_image}
+              alt="profile"
+              className="object-cover w-full h-full rounded-3xl"
+            />
+          </div>
+          <p>{userDetails.firstName} {userDetails.lastName}</p>
         </div>
       </div>
     </div>

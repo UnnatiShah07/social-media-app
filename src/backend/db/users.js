@@ -12,6 +12,8 @@ export const users = [
     lastName: "Balika",
     username: "adarshbalika",
     password: "adarshBalika123",
+    profile_image:
+      "https://www.shutterstock.com/image-illustration/avatar-profile-female-face-silhouette-260nw-492465211.jpg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -21,6 +23,8 @@ export const users = [
     lastName: "Tyagi",
     username: "urmila_tyagi",
     password: "12345678",
+    profile_image:
+      "https://www.svgrepo.com/show/382095/female-avatar-girl-face-woman-user-4.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -38,6 +42,8 @@ export const users = [
     firstName: "Unnati",
     lastName: "Shah",
     username: "unnati_shah",
+    profile_image:
+      "https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png",
     password: "12345678",
     createdAt: formatDate(),
     updatedAt: formatDate(),
