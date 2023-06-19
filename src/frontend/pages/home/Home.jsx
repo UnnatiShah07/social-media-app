@@ -1,13 +1,32 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
 import {
   BottomNav,
   Header,
+  Loader,
   PostCard,
   SidebarNav,
   UserSuggestion,
 } from "../../components";
 import { VscSettings } from "react-icons/vsc";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostsByUser, getUsers } from "../../redux";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { userPosts, loading: postLoading } = useSelector(
+    (state) => state.postReducer
+  );
+  const { users, loading: userLoading } = useSelector(
+    (state) => state.userReducer
+  );
+  const { userDetails } = useSelector((state) => state.authReducer);
+
+  useEffect(() => {
+    dispatch(getPostsByUser(userDetails.username));
+    dispatch(getUsers());
+  }, []);
+
   return (
     <div className="sm:flex min-h-screen">
       <div className="mt-12 sm:mt-0 flex w-full h-screen">
@@ -20,11 +39,14 @@ const Home = () => {
             <VscSettings size={20} />
           </div>
           <div className="w-full h-screen flex flex-col items-center gap-7">
-            <PostCard />
-            <div className="border w-11/12 sm:w-6/12"></div>
-            <PostCard />
-            <div className="border w-11/12 sm:w-6/12"></div>
-            <PostCard />
+            {userPosts.map((post, index) => (
+              <>
+                <PostCard post={post} key={post.id} />
+                {/* {index !== posts.length - 1 && ( */}
+                <div className="border w-11/12 sm:w-6/12"></div>
+                {/* )} */}
+              </>
+            ))}
           </div>
         </div>
         <div className="sm:w-4/12 h-full hidden sm:block px-8">
@@ -34,13 +56,13 @@ const Home = () => {
             placeholder="Search people..."
           />
           <div className="">
-            <UserSuggestion />
-            <UserSuggestion />
-            <UserSuggestion />
-            <UserSuggestion />
+            {users.map((user) => (
+              <UserSuggestion user={user} key={user.id} />
+            ))}
           </div>
         </div>
       </div>
+      {(postLoading || userLoading) && <Loader />}
       <Header />
       <BottomNav />
     </div>

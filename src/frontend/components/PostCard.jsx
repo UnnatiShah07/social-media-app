@@ -7,9 +7,10 @@ import { FaRegComment } from "react-icons/fa";
 import { RiBookmarkLine, RiBookmarkFill } from "react-icons/ri";
 import { useState } from "react";
 
-const PostCard = () => {
+const PostCard = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const { username, artImage, content, likes } = post;
 
   return (
     <div className="h-fit w-11/12 sm:w-6/12 flex flex-col gap-2 text-sm">
@@ -22,22 +23,14 @@ const PostCard = () => {
             }
             alt=""
           />
-          <p className="font-semibold">username</p>
+          <p className="font-semibold">{username}</p>
         </div>
         <div>
           <HiOutlineDotsHorizontal size={20} />
         </div>
       </div>
-      <img
-        src={
-          "https://i.etsystatic.com/18730211/r/il/a66238/1811347054/il_794xN.1811347054_f3wv.jpg"
-        }
-        alt=""
-      />
-      <p className="py-3">
-        After placing 100+ programmers i in top Indian startups, I am thinking
-        of coming up with a program for business roles as well.
-      </p>
+      <img src={artImage} alt="" />
+      <p className="py-3">{content}</p>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div onClick={() => setIsLiked(!isLiked)}>
@@ -58,11 +51,14 @@ const PostCard = () => {
         </div>
       </div>
       <div className="text-xs font-medium flex flex-col gap-1">
-        <p>1 like</p>
         <p>
-          username{" "}
+          {likes.likeCount} {likes.likeCount > 1 ? "likes" : "like"}
+        </p>
+        <p>
+          {`${username} `}
           <span className="font-normal text-gray-500">
-            Life isn’t about finding yourself. Life is about creating yourself.
+            {post?.caption ??
+              "Caption caption caption caption"}
           </span>
         </p>
         <p className="font-normal text-gray-500">07 Jan,2020</p>

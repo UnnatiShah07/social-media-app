@@ -13,7 +13,7 @@ export const users = [
     username: "adarshbalika",
     password: "adarshBalika123",
     profile_image:
-      "https://www.shutterstock.com/image-illustration/avatar-profile-female-face-silhouette-260nw-492465211.jpg",
+      "https://cutewallpaper.org/24/profile-icon-png/circled-user-female-skin-type-4-icon-profile-icon-png-image-transparent-png-free-download-on-seekpng.png",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -33,6 +33,8 @@ export const users = [
     firstName: "Jay",
     lastName: "Sharma",
     username: "jay_sharma",
+    profile_image:
+      "https://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG.png",
     password: "12345678",
     createdAt: formatDate(),
     updatedAt: formatDate(),
@@ -53,6 +55,8 @@ export const users = [
     firstName: "Nilesh",
     lastName: "Mishara",
     username: "nilesh_mishara",
+    profile_image:
+      "https://www.pngall.com/wp-content/uploads/12/Boy-PNG-Images.png",
     password: "12345678",
     createdAt: formatDate(),
     updatedAt: formatDate(),
