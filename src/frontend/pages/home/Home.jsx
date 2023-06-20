@@ -6,7 +6,7 @@ import {
   Loader,
   PostCard,
   SidebarNav,
-  UserSuggestion,
+  UserSuggestionComp,
 } from "../../components";
 import { VscSettings } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,9 +17,7 @@ const Home = () => {
   const { userPosts, loading: postLoading } = useSelector(
     (state) => state.postReducer
   );
-  const { users, loading: userLoading } = useSelector(
-    (state) => state.userReducer
-  );
+  const { loading: userLoading } = useSelector((state) => state.userReducer);
   const { userDetails } = useSelector((state) => state.authReducer);
 
   useEffect(() => {
@@ -42,25 +40,12 @@ const Home = () => {
             {userPosts.map((post, index) => (
               <>
                 <PostCard post={post} key={post.id} />
-                {/* {index !== posts.length - 1 && ( */}
                 <div className="border w-11/12 sm:w-6/12"></div>
-                {/* )} */}
               </>
             ))}
           </div>
         </div>
-        <div className="sm:w-4/12 h-full hidden sm:block px-8">
-          <input
-            type="text"
-            className="h-10 px-3 my-8 mt-10"
-            placeholder="Search people..."
-          />
-          <div className="">
-            {users.map((user) => (
-              <UserSuggestion user={user} key={user.id} />
-            ))}
-          </div>
-        </div>
+        <UserSuggestionComp />
       </div>
       {(postLoading || userLoading) && <Loader />}
       <Header />

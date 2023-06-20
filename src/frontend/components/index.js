@@ -7,3 +7,4 @@ export { default as Header } from "./Header";
 export { default as NavbarItem } from "./NavbarItem";
 export { default as UserSuggestion } from "./UsersSuggestion";
 export { default as PostCard } from "./PostCard";
+export { default as UserSuggestionComp } from "./UserSuggestionComp";
