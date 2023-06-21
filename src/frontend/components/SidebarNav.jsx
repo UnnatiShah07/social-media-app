@@ -3,11 +3,13 @@ import { MdExplore, MdOutlineBookmark } from "react-icons/md";
 import { RiAddCircleFill } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router";
 import NavbarItem from "./NavbarItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateShowAddPost } from "../redux";
 
 const SidebarNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.authReducer);
 
   return (
@@ -39,7 +41,7 @@ const SidebarNav = () => {
             title="Bookmark"
           />
           <NavbarItem
-            onClick={() => {}}
+            onClick={() => dispatch(updateShowAddPost(true))}
             icon={<RiAddCircleFill size={20} />}
             isActive={false}
             title="Add Post"
@@ -57,7 +59,9 @@ const SidebarNav = () => {
               className="object-cover w-full h-full rounded-3xl"
             />
           </div>
-          <p>{userDetails.firstName} {userDetails.lastName}</p>
+          <p>
+            {userDetails.firstName} {userDetails.lastName}
+          </p>
         </div>
       </div>
     </div>

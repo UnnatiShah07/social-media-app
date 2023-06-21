@@ -8,3 +8,4 @@ export { default as NavbarItem } from "./NavbarItem";
 export { default as UserSuggestion } from "./UsersSuggestion";
 export { default as PostCard } from "./PostCard";
 export { default as UserSuggestionComp } from "./UserSuggestionComp";
+export { default as AddPostModal } from "./AddPostModal";

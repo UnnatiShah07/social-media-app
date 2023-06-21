@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import {
+  AddPostModal,
   BottomNav,
   Header,
   Loader,
@@ -14,16 +15,22 @@ import { getPostsByUser, getUsers } from "../../redux";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { userPosts, loading: postLoading } = useSelector(
-    (state) => state.postReducer
-  );
+  const {
+    userPosts,
+    loading: postLoading,
+    showAddPost,
+    posts,
+  } = useSelector((state) => state.postReducer);
   const { loading: userLoading } = useSelector((state) => state.userReducer);
   const { userDetails } = useSelector((state) => state.authReducer);
 
   useEffect(() => {
-    dispatch(getPostsByUser(userDetails.username));
     dispatch(getUsers());
   }, []);
+
+  useEffect(() => {
+    dispatch(getPostsByUser(userDetails.username));
+  }, [posts]);
 
   return (
     <div className="sm:flex min-h-screen">
@@ -48,6 +55,7 @@ const Home = () => {
         <UserSuggestionComp />
       </div>
       {(postLoading || userLoading) && <Loader />}
+      {showAddPost && <AddPostModal />}
       <Header />
       <BottomNav />
     </div>

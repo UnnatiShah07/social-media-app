@@ -6,14 +6,20 @@ import {
 import { FaRegComment } from "react-icons/fa";
 import { RiBookmarkLine, RiBookmarkFill } from "react-icons/ri";
 import { useState } from "react";
+import dayjs from "dayjs";
+import { useDispatch, useSelector } from "react-redux";
+import { updateShowEditDelete } from "../redux/slices/postSlice";
 
 const PostCard = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const { username, artImage, content, likes } = post;
+  const dispatch = useDispatch();
+  const { userDetails } = useSelector((state) => state.authReducer);
+  const { showEditDelete } = useSelector((state) => state.postReducer);
+  const { username, artImage, content, likes, createdAt } = post;
 
   return (
-    <div className="h-fit w-11/12 sm:w-6/12 flex flex-col gap-2 text-sm">
+    <div className="h-fit w-11/12 sm:w-6/12 flex flex-col gap-2 text-sm relative">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <img
@@ -25,9 +31,14 @@ const PostCard = ({ post }) => {
           />
           <p className="font-semibold">{username}</p>
         </div>
-        <div>
-          <HiOutlineDotsHorizontal size={20} />
-        </div>
+        {userDetails.username === username && (
+          <div>
+            <HiOutlineDotsHorizontal
+              size={20}
+              onClick={() => dispatch(updateShowEditDelete(true))}
+            />
+          </div>
+        )}
       </div>
       <img src={artImage} alt="" />
       <p className="py-3">{content}</p>
@@ -54,15 +65,20 @@ const PostCard = ({ post }) => {
         <p>
           {likes.likeCount} {likes.likeCount > 1 ? "likes" : "like"}
         </p>
-        <p>
-          {`${username} `}
-          <span className="font-normal text-gray-500">
-            {post?.caption ??
-              "Caption caption caption caption"}
-          </span>
+        <p className="font-normal text-gray-500">
+          {dayjs(createdAt).format("MMM D, YYYY h:mm A")}
         </p>
-        <p className="font-normal text-gray-500">07 Jan,2020</p>
       </div>
+      {showEditDelete && <EditDeletePopup />}
+    </div>
+  );
+};
+
+const EditDeletePopup = () => {
+  return (
+    <div className="absolute top-8 right-0 w-20 h-16 flex flex-col items-center justify-center bg-white border border-black">
+      <p>Edit</p>
+      <p>Delete</p>
     </div>
   );
 };

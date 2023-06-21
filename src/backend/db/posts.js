@@ -1,27 +1,11 @@
 // import { v4 as uuid } from "uuid";
-import { formatDate } from "../utils/authUtils";
-
+import dayjs from "dayjs";
 /**
  * Posts can be added here.
  * You can add default posts of your wish with different attributes
  * */
 
 export const posts = [
-  // {
-  //   _id: uuid(),
-  //   content:
-  //     "Life isn’t about finding yourself. Life is about creating yourself.",
-  //   artImage:
-  //     "https://i.etsystatic.com/32281859/r/il/5e05cf/4565358316/il_794xN.4565358316_c5oj.jpg",
-  //   likes: {
-  //     likeCount: 0,
-  //     likedBy: [],
-  //     dislikedBy: [],
-  //   },
-  //   username: "shubhamsoni",
-  //   createdAt: formatDate(),
-  //   updatedAt: formatDate(),
-  // },
   {
     _id: "d8bc0df5-0ad5-4671-b603-92d89d50f57a",
     content:
@@ -34,8 +18,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "urmila_tyagi",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(10, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(10, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "61b04ca0-0a26-4691-addd-b4c181537cb7",
@@ -48,8 +32,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "urmila_tyagi",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(20, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(20, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "baa50fb3-695c-48f3-a0de-94702593bf4a",
@@ -62,8 +46,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "jay_sharma",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(30, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(30, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "925147ac-ffd6-4144-a0c6-8106a5a86ac3",
@@ -76,8 +60,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "jay_sharma",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(40, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(40, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "1b164fd7-318c-4e56-81b5-e17ed0da0f94",
@@ -90,8 +74,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(50, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(50, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "563e92d9-554f-4928-88da-92306fc15791",
@@ -103,8 +87,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(60, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(60, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "1d83464a-165a-4002-bb30-c6f1419ae746",
@@ -117,8 +101,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "unnati_shah",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(70, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(70, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "a0eee344-13f6-481f-a8ea-a3a581f97c4c",
@@ -133,8 +117,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "unnati_shah",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(80, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(80, "day").format("MMM D, YYYY h:mm A"),
   },
   {
     _id: "a0eee344-13f6-481f-a8ea-a3a581f97c4c",
@@ -149,7 +133,7 @@ export const posts = [
       dislikedBy: [],
     },
     username: "unnati_shah",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: dayjs().subtract(90, "day").format("MMM D, YYYY h:mm A"),
+    updatedAt: dayjs().subtract(90, "day").format("MMM D, YYYY h:mm A"),
   },
 ];

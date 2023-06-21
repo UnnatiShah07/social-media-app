@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from "react-redux";
 import {
+  AddPostModal,
   BottomNav,
   Header,
   Loader,
@@ -13,7 +14,9 @@ import { getPosts } from "../../redux";
 
 const Explore = () => {
   const dispatch = useDispatch();
-  const { loading, posts } = useSelector((state) => state.postReducer);
+  const { loading, posts, showAddPost } = useSelector(
+    (state) => state.postReducer
+  );
   // const categoryStyle = "border border-primary py-1 px-3 rounded-3xl text-sm font-medium";
 
   useEffect(() => {
@@ -45,6 +48,7 @@ const Explore = () => {
         <UserSuggestionComp />
       </div>
       {loading && <Loader />}
+      {showAddPost && <AddPostModal />}
       <Header />
       <BottomNav />
     </div>
