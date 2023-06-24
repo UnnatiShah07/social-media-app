@@ -16,6 +16,7 @@ export const users = [
       "https://cutewallpaper.org/24/profile-icon-png/circled-user-female-skin-type-4-icon-profile-icon-png-image-transparent-png-free-download-on-seekpng.png",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bookmarks: [],
   },
   {
     _id: "5a6e0abf-c7a0-4904-bfeb-77fae807990d",
@@ -27,6 +28,7 @@ export const users = [
       "https://www.svgrepo.com/show/382095/female-avatar-girl-face-woman-user-4.svg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bookmarks: [],
   },
   {
     _id: "97046567-7051-478b-9599-40110e0557c0",
@@ -38,6 +40,7 @@ export const users = [
     password: "12345678",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bookmarks: [],
   },
   {
     _id: "1fb42ec4-d0a9-4ef3-b5f5-1cd8fca836f7",
@@ -49,6 +52,7 @@ export const users = [
     password: "12345678",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bookmarks: [],
   },
   {
     _id: "d0aa201c-d82d-4bfc-a427-7ffe4f8cc5a1",
@@ -60,5 +64,6 @@ export const users = [
     password: "12345678",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bookmarks: [],
   },
 ];

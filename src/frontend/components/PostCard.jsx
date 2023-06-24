@@ -9,13 +9,19 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import EditDeletePopup from "./EditDeletePopup";
-import { dislikePost, likePost } from "../redux";
+import {
+  bookmarkPost,
+  dislikePost,
+  likePost,
+  removeBookmarkPost,
+} from "../redux";
 import { getProfileImage } from "../utils";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.authReducer);
   const { allUsers } = useSelector((state) => state.userReducer);
+  const { bookmarks } = useSelector((state) => state.postReducer);
   const { username, artImage, content, likes, createdAt } = post;
 
   const [isLiked, setIsLiked] = useState(false);
@@ -27,16 +33,23 @@ const PostCard = ({ post }) => {
       (user) => user._id === userDetails._id
     );
     setIsLiked(isLikedByCurrentUser);
+    const isBookmarkedByCurrentUser = bookmarks.some(
+      (bookmarkPostId) => bookmarkPostId === post._id
+    );
+    setIsBookmarked(isBookmarkedByCurrentUser);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
   const handleLikeDislike = () => {
     setIsLiked(!isLiked);
-    if (!isLiked) {
-      dispatch(likePost(post._id));
-    } else {
-      dispatch(dislikePost(post._id));
-    }
+    if (!isLiked) dispatch(likePost(post._id));
+    else dispatch(dislikePost(post._id));
+  };
+
+  const handleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+    if (!isBookmarked) dispatch(bookmarkPost(post._id));
+    else dispatch(removeBookmarkPost(post._id));
   };
 
   return (
@@ -49,7 +62,7 @@ const PostCard = ({ post }) => {
               getProfileImage(allUsers, post) ??
               "https://static.vecteezy.com/system/resources/previews/021/548/095/original/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg"
             }
-            alt="v;kffkdf"
+            alt="profile"
           />
           <p className="font-semibold">{username}</p>
         </div>
@@ -75,7 +88,7 @@ const PostCard = ({ post }) => {
           </div>
           <FaRegComment size={22} />
         </div>
-        <div onClick={() => setIsBookmarked(!isBookmarked)}>
+        <div onClick={handleBookmark}>
           {isBookmarked ? (
             <RiBookmarkFill size={22} />
           ) : (

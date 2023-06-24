@@ -7,6 +7,7 @@ const initialState = {
   userPosts: [],
   showAddPost: false,
   editPost: {},
+  bookmarks: [],
 };
 
 export const getPosts = createAsyncThunk(
@@ -90,6 +91,46 @@ export const dislikePost = createAsyncThunk(
     try {
       const response = await axiosInstance.post(`/api/posts/dislike/${postId}`);
       if (response.status === 201) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const bookmarkPost = createAsyncThunk(
+  "post/bookmarkPost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(
+        `/api/users/bookmark/${postId}`
+      );
+      if (response.status === 200) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const removeBookmarkPost = createAsyncThunk(
+  "post/removeBookmarkPost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(
+        `/api/users/remove-bookmark/${postId}`
+      );
+      if (response.status === 200) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getAllBookmarkPost = createAsyncThunk(
+  "post/getAllBookmarkPost",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get("/api/users/bookmark/");
+      if (response.status === 200) return response.data;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -182,7 +223,6 @@ export const postSlice = createSlice({
     //likePost
     builder.addCase(likePost.pending, (state, action) => {});
     builder.addCase(likePost.fulfilled, (state, action) => {
-      console.log(action.payload, "/////");
       state.posts = action.payload.posts.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
@@ -192,12 +232,33 @@ export const postSlice = createSlice({
     //disLikePost
     builder.addCase(dislikePost.pending, (state, action) => {});
     builder.addCase(dislikePost.fulfilled, (state, action) => {
-      console.log(action.payload, "/////");
       state.posts = action.payload.posts.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
     });
     builder.addCase(dislikePost.rejected, (state, action) => {});
+
+    //bookmarkPost
+    builder.addCase(bookmarkPost.pending, (state, action) => {});
+    builder.addCase(bookmarkPost.fulfilled, (state, action) => {
+      state.bookmarks = action.payload.bookmarks;
+    });
+    builder.addCase(bookmarkPost.rejected, (state, action) => {});
+
+    //removeBookmarkPost
+    builder.addCase(removeBookmarkPost.pending, (state, action) => {});
+    builder.addCase(removeBookmarkPost.fulfilled, (state, action) => {
+      state.bookmarks = action.payload.bookmarks;
+    });
+    builder.addCase(removeBookmarkPost.rejected, (state, action) => {});
+
+    //getAllBookmarkPost
+    builder.addCase(getAllBookmarkPost.pending, (state, action) => {});
+    builder.addCase(getAllBookmarkPost.fulfilled, (state, action) => {
+      console.log(action.payload, ".........???");
+      state.bookmarks = action.payload.bookmarks;
+    });
+    builder.addCase(getAllBookmarkPost.rejected, (state, action) => {});
   },
 });
 

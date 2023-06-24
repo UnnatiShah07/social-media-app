@@ -24,6 +24,8 @@ const Home = () => {
   const { loading: userLoading } = useSelector((state) => state.userReducer);
   const { userDetails } = useSelector((state) => state.authReducer);
 
+  console.log(userDetails, "======");
+
   useEffect(() => {
     dispatch(getUsers());
   }, []);
