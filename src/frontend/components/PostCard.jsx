@@ -5,18 +5,39 @@ import {
 } from "react-icons/hi";
 import { FaRegComment } from "react-icons/fa";
 import { RiBookmarkLine, RiBookmarkFill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
-import { updateShowEditDelete } from "../redux/slices/postSlice";
+import EditDeletePopup from "./EditDeletePopup";
+import { dislikePost, likePost } from "../redux";
+import { getProfileImage } from "../utils";
 
 const PostCard = ({ post }) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.authReducer);
-  const { showEditDelete } = useSelector((state) => state.postReducer);
+  const { allUsers } = useSelector((state) => state.userReducer);
   const { username, artImage, content, likes, createdAt } = post;
+
+  const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isShowEditDelete, setIsShowEditDelete] = useState(false);
+
+  useEffect(() => {
+    const isLikedByCurrentUser = post.likes.likedBy.some(
+      (user) => user._id === userDetails._id
+    );
+    setIsLiked(isLikedByCurrentUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [post]);
+
+  const handleLikeDislike = () => {
+    setIsLiked(!isLiked);
+    if (!isLiked) {
+      dispatch(likePost(post._id));
+    } else {
+      dispatch(dislikePost(post._id));
+    }
+  };
 
   return (
     <div className="h-fit w-11/12 sm:w-6/12 flex flex-col gap-2 text-sm relative">
@@ -25,9 +46,10 @@ const PostCard = ({ post }) => {
           <img
             className="w-10 h-10 rounded-3xl bg-slate-200"
             src={
-              "https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png"
+              getProfileImage(allUsers, post) ??
+              "https://static.vecteezy.com/system/resources/previews/021/548/095/original/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg"
             }
-            alt=""
+            alt="v;kffkdf"
           />
           <p className="font-semibold">{username}</p>
         </div>
@@ -35,7 +57,7 @@ const PostCard = ({ post }) => {
           <div>
             <HiOutlineDotsHorizontal
               size={20}
-              onClick={() => dispatch(updateShowEditDelete(true))}
+              onClick={() => setIsShowEditDelete(!isShowEditDelete)}
             />
           </div>
         )}
@@ -44,7 +66,7 @@ const PostCard = ({ post }) => {
       <p className="py-3">{content}</p>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div onClick={() => setIsLiked(!isLiked)}>
+          <div onClick={handleLikeDislike}>
             {isLiked ? (
               <HiHeart size={25} color="#ff3040" />
             ) : (
@@ -69,16 +91,12 @@ const PostCard = ({ post }) => {
           {dayjs(createdAt).format("MMM D, YYYY h:mm A")}
         </p>
       </div>
-      {showEditDelete && <EditDeletePopup />}
-    </div>
-  );
-};
-
-const EditDeletePopup = () => {
-  return (
-    <div className="absolute top-8 right-0 w-20 h-16 flex flex-col items-center justify-center bg-white border border-black">
-      <p>Edit</p>
-      <p>Delete</p>
+      {isShowEditDelete && (
+        <EditDeletePopup
+          post={post}
+          closePopup={() => setIsShowEditDelete(false)}
+        />
+      )}
     </div>
   );
 };

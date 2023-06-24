@@ -4,6 +4,7 @@ import { axiosInstance } from "../../utils";
 const initialState = {
   loading: false,
   users: [],
+  allUsers: [],
 };
 
 export const getUsers = createAsyncThunk(
@@ -34,6 +35,7 @@ export const userSlice = createSlice({
         (user) => user._id !== loginUser._id
       );
       state.users = newUser;
+      state.allUsers = action.payload.users;
     });
     builder.addCase(getUsers.rejected, (state, action) => {
       state.loading = false;

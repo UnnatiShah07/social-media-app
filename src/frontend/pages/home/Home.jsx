@@ -46,7 +46,7 @@ const Home = () => {
           <div className="w-full h-screen flex flex-col items-center gap-7">
             {userPosts.map((post, index) => (
               <>
-                <PostCard post={post} key={post.id} />
+                <PostCard post={post} key={post._id} />
                 <div className="border w-11/12 sm:w-6/12"></div>
               </>
             ))}

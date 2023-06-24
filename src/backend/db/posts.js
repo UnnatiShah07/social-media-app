@@ -18,8 +18,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "urmila_tyagi",
-    createdAt: dayjs().subtract(10, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(10, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(10, "day"),
+    updatedAt: dayjs().subtract(10, "day"),
   },
   {
     _id: "61b04ca0-0a26-4691-addd-b4c181537cb7",
@@ -32,8 +32,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "urmila_tyagi",
-    createdAt: dayjs().subtract(20, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(20, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(20, "day"),
+    updatedAt: dayjs().subtract(20, "day"),
   },
   {
     _id: "baa50fb3-695c-48f3-a0de-94702593bf4a",
@@ -46,8 +46,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "jay_sharma",
-    createdAt: dayjs().subtract(30, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(30, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(30, "day"),
+    updatedAt: dayjs().subtract(30, "day"),
   },
   {
     _id: "925147ac-ffd6-4144-a0c6-8106a5a86ac3",
@@ -60,8 +60,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "jay_sharma",
-    createdAt: dayjs().subtract(40, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(40, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(40, "day"),
+    updatedAt: dayjs().subtract(40, "day"),
   },
   {
     _id: "1b164fd7-318c-4e56-81b5-e17ed0da0f94",
@@ -74,8 +74,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: dayjs().subtract(50, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(50, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(50, "day"),
+    updatedAt: dayjs().subtract(50, "day"),
   },
   {
     _id: "563e92d9-554f-4928-88da-92306fc15791",
@@ -87,8 +87,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "adarshbalika",
-    createdAt: dayjs().subtract(60, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(60, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(60, "day"),
+    updatedAt: dayjs().subtract(60, "day"),
   },
   {
     _id: "1d83464a-165a-4002-bb30-c6f1419ae746",
@@ -101,8 +101,8 @@ export const posts = [
       dislikedBy: [],
     },
     username: "unnati_shah",
-    createdAt: dayjs().subtract(70, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(70, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(70, "day"),
+    updatedAt: dayjs().subtract(70, "day"),
   },
   {
     _id: "a0eee344-13f6-481f-a8ea-a3a581f97c4c",
@@ -117,23 +117,21 @@ export const posts = [
       dislikedBy: [],
     },
     username: "unnati_shah",
-    createdAt: dayjs().subtract(80, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(80, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(80, "day"),
+    updatedAt: dayjs().subtract(80, "day"),
   },
   {
-    _id: "a0eee344-13f6-481f-a8ea-a3a581f97c4c",
+    _id: "a0eee344-13f6-481f-a8ea-a3a581f97c4u",
     content: "Black Handmade polymer clay earrings",
-    // artImage:
-    //   "https://i.etsystatic.com/19943978/r/il/f025ba/3378630748/il_794xN.3378630748_gcle.jpg",
-    // artImageTwo:
-    //   "https://i.etsystatic.com/15599644/r/il/a8caa1/4560343544/il_794xN.4560343544_qk84.jpg",
+    artImage:
+      "https://i.etsystatic.com/15599644/r/il/a8caa1/4560343544/il_794xN.4560343544_qk84.jpg",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
     username: "unnati_shah",
-    createdAt: dayjs().subtract(90, "day").format("MMM D, YYYY h:mm A"),
-    updatedAt: dayjs().subtract(90, "day").format("MMM D, YYYY h:mm A"),
+    createdAt: dayjs().subtract(90, "day"),
+    updatedAt: dayjs().subtract(90, "day"),
   },
 ];

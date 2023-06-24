@@ -1,6 +1,6 @@
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { updateShowAddPost, uploadPost } from "../redux";
+import { updateShowAddPost, uploadPost, editPost } from "../redux";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import dayjs from "dayjs";
@@ -8,19 +8,30 @@ import dayjs from "dayjs";
 const AddPostModal = () => {
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.authReducer);
-  const [postText, setPostText] = useState("");
+  const { editPost: postData } = useSelector((state) => state.postReducer);
+  const [postText, setPostText] = useState(postData.content ?? "");
 
   const handleUploadPost = () => {
     dispatch(updateShowAddPost(false));
-    dispatch(
-      uploadPost({
-        _id: uuid(),
-        content: postText,
-        username: userDetails.username,
-        createdAt: dayjs().format("MMM D, YYYY h:mm A"),
-        updatedAt: dayjs().format("MMM D, YYYY h:mm A"),
-      })
-    );
+    if (Object.keys(postData).length) {
+      dispatch(
+        editPost({
+          ...postData,
+          content: postText,
+          updatedAt: dayjs().format("MMM D, YYYY h:mm A"),
+        })
+      );
+    } else {
+      dispatch(
+        uploadPost({
+          _id: uuid(),
+          content: postText,
+          username: userDetails.username,
+          createdAt: dayjs().format("MMM D, YYYY h:mm A"),
+          updatedAt: dayjs().format("MMM D, YYYY h:mm A"),
+        })
+      );
+    }
   };
 
   return (
