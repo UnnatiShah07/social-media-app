@@ -47,6 +47,7 @@ export const users = [
     firstName: "Unnati",
     lastName: "Shah",
     username: "unnati_shah",
+    bio: "Hello I am Unnati Shah",
     profile_image:
       "https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png",
     password: "12345678",

@@ -36,7 +36,7 @@ const Explore = () => {
             <p className={categoryStyle}>Mandala Art</p>
             <p className={categoryStyle}>Clay Earing Art</p>
           </div> */}
-          <div className="w-full h-screen flex flex-col items-center gap-7">
+          <div className="w-full flex flex-col items-center gap-7 pb-10 sm:pb-0">
             {posts.map((post, index) => (
               <>
                 <PostCard post={post} key={post.id} />

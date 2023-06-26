@@ -37,7 +37,7 @@ const Bookmark = () => {
           <SidebarNav />
         </div>
         <div className="w-full sm:w-9/12 h-screen mt-5 sm:mt-0 sm:pt-10 flex flex-col items-center gap-5 overflow-auto hide-scrollbar">
-          <div className="w-full h-screen flex flex-col items-center gap-7">
+          <div className="w-full flex flex-col items-center gap-7 pb-10 sm:pb-0">
             {bookmarkPosts.length ? (
               bookmarkPosts.map((post, index) => (
                 <>

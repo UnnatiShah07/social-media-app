@@ -24,8 +24,6 @@ const Home = () => {
   const { loading: userLoading } = useSelector((state) => state.userReducer);
   const { userDetails } = useSelector((state) => state.authReducer);
 
-  console.log(userDetails, "======");
-
   useEffect(() => {
     dispatch(getUsers());
   }, []);
@@ -45,7 +43,7 @@ const Home = () => {
             <p>Latest Posts</p>
             <VscSettings size={20} />
           </div>
-          <div className="w-full h-screen flex flex-col items-center gap-7">
+          <div className="w-full flex flex-col items-center gap-7 pb-10 sm:pb-0">
             {userPosts.map((post, index) => (
               <>
                 <PostCard post={post} key={post._id} />
