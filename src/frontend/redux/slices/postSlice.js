@@ -255,7 +255,6 @@ export const postSlice = createSlice({
     //getAllBookmarkPost
     builder.addCase(getAllBookmarkPost.pending, (state, action) => {});
     builder.addCase(getAllBookmarkPost.fulfilled, (state, action) => {
-      console.log(action.payload, ".........???");
       state.bookmarks = action.payload.bookmarks;
     });
     builder.addCase(getAllBookmarkPost.rejected, (state, action) => {});

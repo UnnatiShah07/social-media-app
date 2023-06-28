@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   users: [],
   allUsers: [],
+  singleUserDetails: {},
 };
 
 export const getUsers = createAsyncThunk(
@@ -12,6 +13,44 @@ export const getUsers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get("/api/users");
+      if (response.status === 200) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getUserById = createAsyncThunk(
+  "user/getUserById",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(`/api/users/${userId}`);
+      if (response.status === 200) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const followUser = createAsyncThunk(
+  "user/followUser",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(`/api/users/follow/${userId}`);
+      if (response.status === 200) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const unfollowUser = createAsyncThunk(
+  "user/unfollowUser",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(
+        `/api/users/unfollow/${userId}`
+      );
       if (response.status === 200) return response.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -40,6 +79,28 @@ export const userSlice = createSlice({
     builder.addCase(getUsers.rejected, (state, action) => {
       state.loading = false;
     });
+
+    //getUserById
+    builder.addCase(getUserById.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getUserById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.singleUserDetails = action.payload.user;
+    });
+    builder.addCase(getUserById.rejected, (state, action) => {
+      state.loading = false;
+    });
+
+    //followUser
+    builder.addCase(followUser.pending, (state, action) => {});
+    builder.addCase(followUser.fulfilled, (state, action) => {});
+    builder.addCase(followUser.rejected, (state, action) => {});
+
+    //unfollowUser
+    builder.addCase(unfollowUser.pending, (state, action) => {});
+    builder.addCase(unfollowUser.fulfilled, (state, action) => {});
+    builder.addCase(unfollowUser.rejected, (state, action) => {});
   },
 });
 

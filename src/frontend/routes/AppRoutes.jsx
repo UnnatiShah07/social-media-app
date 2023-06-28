@@ -33,7 +33,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/profile"
+        path="/profile/:userId"
         element={
           <PrivateRoute>
             <Profile />

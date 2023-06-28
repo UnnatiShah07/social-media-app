@@ -47,13 +47,13 @@ export const users = [
     firstName: "Unnati",
     lastName: "Shah",
     username: "unnati_shah",
-    bio: "Hello I am Unnati Shah",
     profile_image:
       "https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png",
     password: "12345678",
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bookmarks: [],
+    bio: "Unnati's bio",
   },
   {
     _id: "d0aa201c-d82d-4bfc-a427-7ffe4f8cc5a1",

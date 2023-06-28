@@ -50,7 +50,7 @@ const SidebarNav = () => {
 
         <div
           className="flex items-center gap-2"
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate(`/profile/${userDetails._id}`)}
         >
           <div className="w-10 h-10 rounded-3xl border bg-slate-200">
             <img
