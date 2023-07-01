@@ -11,6 +11,7 @@ const SidebarNav = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.authReducer);
+  const isMyProfile = location.pathname === `/profile/${userDetails._id}`;
 
   return (
     <div className="h-screen w-full border-r hidden sm:flex justify-center items-center">
@@ -52,14 +53,21 @@ const SidebarNav = () => {
           className="flex items-center gap-2"
           onClick={() => navigate(`/profile/${userDetails._id}`)}
         >
-          <div className="w-10 h-10 rounded-3xl border bg-slate-200">
+          <div
+            className={`w-10 h-10 rounded-3xl border bg-slate-200 ${
+              isMyProfile && "border border-primary"
+            }`}
+          >
             <img
-              src={userDetails.profile_image}
+              src={
+                userDetails.profile_image ??
+                "https://static.vecteezy.com/system/resources/previews/021/548/095/original/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg"
+              }
               alt="profile"
               className="object-cover w-full h-full rounded-3xl"
             />
           </div>
-          <p>
+          <p className={isMyProfile && "text-primary font-medium"}>
             {userDetails.firstName} {userDetails.lastName}
           </p>
         </div>

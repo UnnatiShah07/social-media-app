@@ -17,6 +17,8 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bookmarks: [],
+    bio: "Be yourself, there's no one better.",
+    website: "https://adarshbalika.netlify.app",
   },
   {
     _id: "5a6e0abf-c7a0-4904-bfeb-77fae807990d",
@@ -29,6 +31,8 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bookmarks: [],
+    bio: "Eyes are never quiet.",
+    website: "https://urmila-tyagi.netlify.app",
   },
   {
     _id: "97046567-7051-478b-9599-40110e0557c0",
@@ -41,6 +45,8 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bookmarks: [],
+    bio: "Smile big, laugh often.",
+    website: "https://jay-sharma.netlify.app",
   },
   {
     _id: "1fb42ec4-d0a9-4ef3-b5f5-1cd8fca836f7",
@@ -53,7 +59,8 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bookmarks: [],
-    bio: "Unnati's bio",
+    bio: "Smile little more, regret little less.",
+    website: "https://unnati-shah.netlify.app",
   },
   {
     _id: "d0aa201c-d82d-4bfc-a427-7ffe4f8cc5a1",
@@ -66,5 +73,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bookmarks: [],
+    bio: "Life is better when you're laughing.",
+    website: "https://nilesh-mishara.netlify.app",
   },
 ];

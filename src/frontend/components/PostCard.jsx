@@ -16,13 +16,15 @@ import {
   removeBookmarkPost,
 } from "../redux";
 import { getProfileImage } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userDetails } = useSelector((state) => state.authReducer);
-  const { allUsers } = useSelector((state) => state.userReducer);
+  const { users } = useSelector((state) => state.userReducer);
   const { bookmarks } = useSelector((state) => state.postReducer);
-  const { username, artImage, content, likes, createdAt } = post;
+  const { username, artImage, content, likes, createdAt, userId } = post;
 
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -55,12 +57,17 @@ const PostCard = ({ post }) => {
   return (
     <div className="h-fit w-11/12 sm:w-6/12 flex flex-col gap-2 text-sm relative">
       <div className="flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2"
+          onClick={() => navigate(`/profile/${userId}`)}
+        >
           <img
             className="w-10 h-10 rounded-3xl bg-slate-200"
             src={
-              getProfileImage(allUsers, post) ??
-              "https://static.vecteezy.com/system/resources/previews/021/548/095/original/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg"
+              userDetails.username === username
+                ? userDetails.profile_image
+                : getProfileImage(users, post) ??
+                  "https://static.vecteezy.com/system/resources/previews/021/548/095/original/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg"
             }
             alt="profile"
           />

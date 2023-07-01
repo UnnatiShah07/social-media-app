@@ -4,7 +4,6 @@ import { axiosInstance } from "../../utils";
 const initialState = {
   loading: false,
   users: [],
-  allUsers: [],
   singleUserDetails: {},
 };
 
@@ -58,6 +57,20 @@ export const unfollowUser = createAsyncThunk(
   }
 );
 
+export const editProfile = createAsyncThunk(
+  "user/editProfile",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post("/api/users/edit", {
+        userData,
+      });
+      if (response.status === 201) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -74,7 +87,6 @@ export const userSlice = createSlice({
         (user) => user._id !== loginUser._id
       );
       state.users = newUser;
-      state.allUsers = action.payload.users;
     });
     builder.addCase(getUsers.rejected, (state, action) => {
       state.loading = false;
@@ -101,6 +113,17 @@ export const userSlice = createSlice({
     builder.addCase(unfollowUser.pending, (state, action) => {});
     builder.addCase(unfollowUser.fulfilled, (state, action) => {});
     builder.addCase(unfollowUser.rejected, (state, action) => {});
+
+    //editProfile
+    builder.addCase(editProfile.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(editProfile.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(editProfile.rejected, (state, action) => {
+      state.loading = false;
+    });
   },
 });
 
