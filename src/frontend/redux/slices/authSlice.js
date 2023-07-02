@@ -3,8 +3,8 @@ import { axiosInstance } from "../../utils";
 
 const initialState = {
   loading: false,
-  token: "",
-  userDetails: {},
+  token: localStorage.getItem("token") ?? "",
+  userDetails: JSON.parse(localStorage.getItem("user")) ?? {},
 };
 
 export const loginUser = createAsyncThunk(
@@ -34,7 +34,15 @@ export const signupUser = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    removeAuthData: (state) => {
+      state.token = "";
+      state.userDetails = {};
+    },
+    updateUserDetails: (state, action) => {
+      state.userDetails = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     //login
     builder.addCase(loginUser.pending, (state, action) => {
@@ -70,5 +78,5 @@ export const authSlice = createSlice({
   },
 });
 
-// export const {} = authSlice.actions;
+export const { removeAuthData, updateUserDetails } = authSlice.actions;
 export const authReducer = authSlice.reducer;

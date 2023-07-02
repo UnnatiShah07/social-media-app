@@ -1,2 +1,14 @@
 export { default as PasswordInput } from "./PasswordInput";
 export { default as Loader } from "./Loader";
+export { default as PrivateRoute } from "./PrivateRoutes";
+export { default as SidebarNav } from "./SidebarNav";
+export { default as BottomNav } from "./BottomNav";
+export { default as Header } from "./Header";
+export { default as NavbarItem } from "./NavbarItem";
+export { default as UserSuggestion } from "./UsersSuggestion";
+export { default as PostCard } from "./PostCard";
+export { default as UserSuggestionComp } from "./UserSuggestionComp";
+export { default as AddPostModal } from "./AddPostModal";
+export { default as EditDeletePopup } from "./EditDeletePopup";
+export { default as EditProfile } from "./EditProfile";
+export { default as FilterPostPopup } from "./FilterPostPopup";
