@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   users: [],
   singleUserDetails: {},
+  showUserSuggestion: false,
 };
 
 export const getUsers = createAsyncThunk(
@@ -74,7 +75,11 @@ export const editProfile = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setShowUserSuggestion: (state, action) => {
+      state.showUserSuggestion = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     //getUsers
     builder.addCase(getUsers.pending, (state, action) => {
@@ -127,4 +132,5 @@ export const userSlice = createSlice({
   },
 });
 
+export const { setShowUserSuggestion } = userSlice.actions;
 export const userReducer = userSlice.reducer;

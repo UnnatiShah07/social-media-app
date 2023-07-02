@@ -22,10 +22,10 @@ const UserSuggestionComp = () => {
   }, [searchValue, users]);
 
   return (
-    <div className="sm:w-4/12 h-full hidden sm:block px-8">
+    <>
       <input
         type="text"
-        className="h-10 px-3 my-8 mt-10"
+        className="h-10 px-3 my-4 sm:my-8 sm:mt-10"
         placeholder="Search people..."
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
@@ -35,7 +35,7 @@ const UserSuggestionComp = () => {
           <UserSuggestion user={user} key={user.id} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

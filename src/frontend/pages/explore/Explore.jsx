@@ -10,13 +10,15 @@ import {
   UserSuggestionComp,
 } from "../../components";
 import { useEffect } from "react";
-import { getPosts } from "../../redux";
+import { getPosts, setShowUserSuggestion } from "../../redux";
+import { RxCross1 } from "react-icons/rx";
 
 const Explore = () => {
   const dispatch = useDispatch();
   const { loading, posts, showAddPost } = useSelector(
     (state) => state.postReducer
   );
+  const { showUserSuggestion } = useSelector((state) => state.userReducer);
   // const categoryStyle = "border border-primary py-1 px-3 rounded-3xl text-sm font-medium";
 
   useEffect(() => {
@@ -45,10 +47,23 @@ const Explore = () => {
             ))}
           </div>
         </div>
-        <UserSuggestionComp />
+        <div className="sm:w-4/12 h-full hidden sm:block px-8">
+          <UserSuggestionComp />
+        </div>
       </div>
       {loading && <Loader />}
       {showAddPost && <AddPostModal />}
+      {showUserSuggestion && (
+        <div className="absolute top-0 bottom-0 right-0 left-0 bg-gray-900/[.30]">
+          <div className="sm:w-4/12 flex flex-col px-8 bg-white pt-16 pb-3 rounded-md">
+            <RxCross1
+              className="self-end"
+              onClick={() => dispatch(setShowUserSuggestion(false))}
+            />
+            <UserSuggestionComp />
+          </div>
+        </div>
+      )}
       <Header />
       <BottomNav />
     </div>

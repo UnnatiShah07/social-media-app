@@ -1,5 +1,6 @@
 // import { v4 as uuid } from "uuid";
 import dayjs from "dayjs";
+import { formatDate } from "../utils/authUtils";
 /**
  * Posts can be added here.
  * You can add default posts of your wish with different attributes
@@ -119,8 +120,37 @@ export const posts = [
     artImageTwo:
       "https://i.etsystatic.com/15599644/r/il/a8caa1/4560343544/il_794xN.4560343544_qk84.jpg",
     likes: {
-      likeCount: 0,
-      likedBy: [],
+      likeCount: 2,
+      likedBy: [
+        {
+          _id: "1fb42ec4-d0a9-4ef3-b5f5-1cd8fca836f7",
+          firstName: "Unnati",
+          lastName: "Shah",
+          username: "unnati_shah",
+          profile_image:
+            "https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png",
+          password: "12345678",
+          createdAt: formatDate(),
+          updatedAt: formatDate(),
+          bookmarks: [],
+          bio: "Smile little more, regret little less.",
+          website: "https://unnati-shah.netlify.app",
+        },
+        {
+          _id: "97046567-7051-478b-9599-40110e0557c0",
+          firstName: "Jay",
+          lastName: "Sharma",
+          username: "jay_sharma",
+          profile_image:
+            "https://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG.png",
+          password: "12345678",
+          createdAt: formatDate(),
+          updatedAt: formatDate(),
+          bookmarks: [],
+          bio: "Smile big, laugh often.",
+          website: "https://jay-sharma.netlify.app",
+        },
+      ],
       dislikedBy: [],
     },
     username: "unnati_shah",
@@ -134,8 +164,23 @@ export const posts = [
     artImage:
       "https://i.etsystatic.com/15599644/r/il/a8caa1/4560343544/il_794xN.4560343544_qk84.jpg",
     likes: {
-      likeCount: 0,
-      likedBy: [],
+      likeCount: 1,
+      likedBy: [
+        {
+          _id: "1fb42ec4-d0a9-4ef3-b5f5-1cd8fca836f7",
+          firstName: "Unnati",
+          lastName: "Shah",
+          username: "unnati_shah",
+          profile_image:
+            "https://w7.pngwing.com/pngs/129/292/png-transparent-female-avatar-girl-face-woman-user-flat-classy-users-icon.png",
+          password: "12345678",
+          createdAt: formatDate(),
+          updatedAt: formatDate(),
+          bookmarks: [],
+          bio: "Smile little more, regret little less.",
+          website: "https://unnati-shah.netlify.app",
+        },
+      ],
       dislikedBy: [],
     },
     username: "unnati_shah",

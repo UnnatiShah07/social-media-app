@@ -10,13 +10,15 @@ import {
 } from "../../components";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getAllBookmarkPost } from "../../redux";
+import { getAllBookmarkPost, setShowUserSuggestion } from "../../redux";
+import { RxCross1 } from "react-icons/rx";
 
 const Bookmark = () => {
   const dispatch = useDispatch();
   const { bookmarks, posts, showAddPost } = useSelector(
     (state) => state.postReducer
   );
+  const { showUserSuggestion } = useSelector((state) => state.userReducer);
   const [bookmarkPosts, setBookmarkPosts] = useState([]);
 
   useEffect(() => {
@@ -50,9 +52,22 @@ const Bookmark = () => {
             )}
           </div>
         </div>
-        <UserSuggestionComp />
+        <div className="sm:w-4/12 h-full hidden sm:block px-8">
+          <UserSuggestionComp />
+        </div>
       </div>
       {showAddPost && <AddPostModal />}
+      {showUserSuggestion && (
+        <div className="absolute top-0 bottom-0 right-0 left-0 bg-gray-900/[.30]">
+          <div className="sm:w-4/12 flex flex-col px-8 bg-white pt-16 pb-3 rounded-md">
+            <RxCross1
+              className="self-end"
+              onClick={() => dispatch(setShowUserSuggestion(false))}
+            />
+            <UserSuggestionComp />
+          </div>
+        </div>
+      )}
       <Header />
       <BottomNav />
     </div>

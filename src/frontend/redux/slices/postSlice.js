@@ -8,6 +8,8 @@ const initialState = {
   showAddPost: false,
   editPost: {},
   bookmarks: [],
+  showFilterPost: false,
+  filterPostType: "latest",
 };
 
 export const getPosts = createAsyncThunk(
@@ -147,6 +149,12 @@ export const postSlice = createSlice({
     setEditPostData: (state, action) => {
       state.editPost = action.payload;
     },
+    updateShowFilterPost: (state, action) => {
+      state.showFilterPost = action.payload;
+    },
+    updateFilterPostType: (state, action) => {
+      state.filterPostType = action.payload;
+    },
   },
   extraReducers: (builder) => {
     //getPosts
@@ -262,4 +270,9 @@ export const postSlice = createSlice({
 });
 
 export const postReducer = postSlice.reducer;
-export const { updateShowAddPost, setEditPostData } = postSlice.actions;
+export const {
+  updateShowAddPost,
+  setEditPostData,
+  updateShowFilterPost,
+  updateFilterPostType,
+} = postSlice.actions;

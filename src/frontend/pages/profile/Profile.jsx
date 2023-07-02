@@ -18,11 +18,13 @@ import {
   getPostsByUser,
   getUserById,
   removeAuthData,
+  setShowUserSuggestion,
   unfollowUser,
   updateUserDetails,
 } from "../../redux";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { RxCross1 } from "react-icons/rx";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -31,9 +33,11 @@ const Profile = () => {
     showAddPost,
     userPosts,
   } = useSelector((state) => state.postReducer);
-  const { loading: userLoading, singleUserDetails: user } = useSelector(
-    (state) => state.userReducer
-  );
+  const {
+    loading: userLoading,
+    singleUserDetails: user,
+    showUserSuggestion,
+  } = useSelector((state) => state.userReducer);
   const { userDetails } = useSelector((state) => state.authReducer);
   const { userId } = useParams();
   const isLoginUser = userDetails._id === userId;
@@ -163,12 +167,15 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="w-11/12 sm:hidden flex flex-col flex-wrap text-sm">
+          <div className="w-11/12 sm:hidden flex gap-1 flex-col flex-wrap text-sm">
             <p className="font-medium">
               {personInfo.firstName} {personInfo.lastName}
             </p>
             <p>{personInfo.bio}</p>
-            <a href={personInfo.website}>{personInfo.website}</a>
+            <div className="flex gap-2 items-center text-cyan-700">
+              <BiLink size={15} />
+              <a href={personInfo.website}>{personInfo.website}</a>
+            </div>
           </div>
 
           <div className="w-11/12 flex justify-between sm:hidden text-center text-sm">
@@ -195,11 +202,24 @@ const Profile = () => {
             ))}
           </div>
         </div>
-        <UserSuggestionComp />
+        <div className="sm:w-4/12 h-full hidden sm:block px-8">
+          <UserSuggestionComp />
+        </div>
       </div>
       {(userLoading || postLoading) && <Loader />}
       {showAddPost && <AddPostModal />}
       {isEditOpen && <EditProfile closeEditProfile={closeEditProfile} />}
+      {showUserSuggestion && (
+        <div className="absolute top-0 bottom-0 right-0 left-0 bg-gray-900/[.30]">
+          <div className="sm:w-4/12 flex flex-col px-8 bg-white pt-16 pb-3 rounded-md">
+            <RxCross1
+              className="self-end"
+              onClick={() => dispatch(setShowUserSuggestion(false))}
+            />
+            <UserSuggestionComp />
+          </div>
+        </div>
+      )}
       <Header />
       <BottomNav />
     </div>

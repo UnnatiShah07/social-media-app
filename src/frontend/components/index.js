@@ -11,3 +11,4 @@ export { default as UserSuggestionComp } from "./UserSuggestionComp";
 export { default as AddPostModal } from "./AddPostModal";
 export { default as EditDeletePopup } from "./EditDeletePopup";
 export { default as EditProfile } from "./EditProfile";
+export { default as FilterPostPopup } from "./FilterPostPopup";
