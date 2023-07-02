@@ -16,6 +16,18 @@ const Login = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.authReducer);
 
+  const handleLoginAsGuest = () => {
+    dispatch(
+      loginUser({
+        username: "unnati_shah",
+        password: "12345678",
+      })
+    )
+      .unwrap()
+      .then(() => navigate("/"))
+      .catch(() => {});
+  };
+
   return (
     <div className="flex flex-row items-center justify-evenly flex-wrap">
       <div className="w-full sm:w-1/2 hidden sm:flex justify-end">
@@ -59,7 +71,9 @@ const Login = () => {
                   <p className="error-text">{errors.password}</p>
                 )}
                 <button onClick={handleSubmit}>Login</button>
-                <button className="secondary-btn">Login as a Guest</button>
+                <button className="secondary-btn" onClick={handleLoginAsGuest}>
+                  Login as a Guest
+                </button>
               </>
             )}
           </Formik>

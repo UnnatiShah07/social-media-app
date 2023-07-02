@@ -31,7 +31,7 @@ const PostCard = ({ post }) => {
   const [isShowEditDelete, setIsShowEditDelete] = useState(false);
 
   useEffect(() => {
-    const isLikedByCurrentUser = post.likes.likedBy.some(
+    const isLikedByCurrentUser = post?.likes?.likedBy?.some(
       (user) => user._id === userDetails._id
     );
     setIsLiked(isLikedByCurrentUser);
@@ -82,7 +82,9 @@ const PostCard = ({ post }) => {
           </div>
         )}
       </div>
-      <img src={artImage} alt="" />
+      <div onClick={() => navigate(`/post/${post._id}`)}>
+        <img src={artImage} alt="" />
+      </div>
       <p className="py-3">{content}</p>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -93,7 +95,10 @@ const PostCard = ({ post }) => {
               <HiOutlineHeart size={25} />
             )}
           </div>
-          <FaRegComment size={22} />
+          <FaRegComment
+            size={22}
+            onClick={() => navigate(`/post/${post._id}`)}
+          />
         </div>
         <div onClick={handleBookmark}>
           {isBookmarked ? (
@@ -105,7 +110,7 @@ const PostCard = ({ post }) => {
       </div>
       <div className="text-xs font-medium flex flex-col gap-1">
         <p>
-          {likes.likeCount} {likes.likeCount > 1 ? "likes" : "like"}
+          {likes?.likeCount} {likes?.likeCount > 1 ? "likes" : "like"}
         </p>
         <p className="font-normal text-gray-500">
           {dayjs(createdAt).format("MMM D, YYYY h:mm A")}

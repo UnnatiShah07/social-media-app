@@ -9,8 +9,7 @@ import {
   SidebarNav,
   UserSuggestionComp,
 } from "../../components";
-import { useEffect } from "react";
-import { getPosts, setShowUserSuggestion } from "../../redux";
+import { setShowUserSuggestion } from "../../redux";
 import { RxCross1 } from "react-icons/rx";
 
 const Explore = () => {
@@ -20,10 +19,6 @@ const Explore = () => {
   );
   const { showUserSuggestion } = useSelector((state) => state.userReducer);
   // const categoryStyle = "border border-primary py-1 px-3 rounded-3xl text-sm font-medium";
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, []);
 
   return (
     <div className="sm:flex min-h-screen">

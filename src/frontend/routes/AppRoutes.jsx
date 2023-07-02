@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Bookmark, Explore, Home, Login, Profile, SignUp } from "../pages";
+import { Bookmark, Explore, Home, Login, PostPage, Profile, SignUp } from "../pages";
 import Mockman from "mockman-js";
 import { PrivateRoute } from "../components";
 
@@ -37,6 +37,14 @@ const AppRoutes = () => {
         element={
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/post/:postId"
+        element={
+          <PrivateRoute>
+            <PostPage />
           </PrivateRoute>
         }
       />

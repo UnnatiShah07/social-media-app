@@ -10,6 +10,7 @@ const initialState = {
   bookmarks: [],
   showFilterPost: false,
   filterPostType: "latest",
+  singlePost: {},
 };
 
 export const getPosts = createAsyncThunk(
@@ -139,6 +140,18 @@ export const getAllBookmarkPost = createAsyncThunk(
   }
 );
 
+export const getPostById = createAsyncThunk(
+  "post/getPostById",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(`/api/posts/${postId}`);
+      if (response.status === 200) return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: "post",
   initialState,
@@ -154,6 +167,9 @@ export const postSlice = createSlice({
     },
     updateFilterPostType: (state, action) => {
       state.filterPostType = action.payload;
+    },
+    updateCommentsInPosts: (state, action) => {
+      state.posts = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -266,6 +282,18 @@ export const postSlice = createSlice({
       state.bookmarks = action.payload.bookmarks;
     });
     builder.addCase(getAllBookmarkPost.rejected, (state, action) => {});
+
+    //getPostById
+    builder.addCase(getPostById.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getPostById.fulfilled, (state, action) => {
+      state.singlePost = action.payload.post;
+      state.loading = false;
+    });
+    builder.addCase(getPostById.rejected, (state, action) => {
+      state.loading = false;
+    });
   },
 });
 
@@ -275,4 +303,5 @@ export const {
   setEditPostData,
   updateShowFilterPost,
   updateFilterPostType,
+  updateCommentsInPosts,
 } = postSlice.actions;

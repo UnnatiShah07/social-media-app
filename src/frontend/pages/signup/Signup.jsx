@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { signupUser } from "../../redux/slices/authSlice";
 
 const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required("Fisrt name is required"),
+  lastName: Yup.string().required("Last name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   username: Yup.string().required("Username is required"),
-  name: Yup.string().required("Full name is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
     .required("Password is required"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Confirm password do not with password")
+    .oneOf([Yup.ref("password"), null], "Confirm password do not match with password")
     .required("Confirm Password is required"),
 });
 
@@ -28,15 +29,18 @@ const SignUp = () => {
         <p className="mb-5 font-caveat text-3xl font-bold">Artist's Showcase</p>
         <Formik
           initialValues={{
+            firstName: "",
+            lastName: "",
             email: "",
             username: "",
-            name: "",
             password: "",
             confirmPassword: "",
           }}
           onSubmit={(values) => {
-            const { email, name, username, password } = values;
-            dispatch(signupUser({ email, name, username, password }))
+            const { email, firstName, lastName, username, password } = values;
+            dispatch(
+              signupUser({ email, firstName, lastName, username, password })
+            )
               .unwrap()
               .then(() => navigate("/"))
               .catch(() => {});
@@ -45,15 +49,28 @@ const SignUp = () => {
         >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <>
-              <input
-                type="text"
-                placeholder="Full name"
-                value={values.name}
-                onChange={handleChange("name")}
-              />
-              {errors.name && touched.name && (
-                <p className="error-text">{errors.name}</p>
-              )}
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Full name"
+                  value={values.firstName}
+                  onChange={handleChange("firstName")}
+                />
+                <input
+                  type="text"
+                  placeholder="Full name"
+                  value={values.lastName}
+                  onChange={handleChange("lastName")}
+                />
+              </div>
+              <div className="flex gap-2">
+                {errors.firstName && touched.firstName && (
+                  <p className="error-text w-6/12">{errors.firstName}</p>
+                )}
+                {errors.lastName && touched.lastName && (
+                  <p className="error-text w-6/12">{errors.lastName}</p>
+                )}
+              </div>
               <input
                 type="text"
                 placeholder="Username"

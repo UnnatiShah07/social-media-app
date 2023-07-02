@@ -8,6 +8,7 @@ import {
   Loader,
   PostCard,
   SidebarNav,
+  UserSuggestion,
   UserSuggestionComp,
 } from "../../components";
 import { FiLogOut } from "react-icons/fi";
@@ -32,6 +33,7 @@ const Profile = () => {
     loading: postLoading,
     showAddPost,
     userPosts,
+    posts,
   } = useSelector((state) => state.postReducer);
   const {
     loading: userLoading,
@@ -44,11 +46,15 @@ const Profile = () => {
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [personInfo, setPersonInfo] = useState({});
+  const [isFollower, setIsFollower] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     if (isLoginUser) setPersonInfo(userDetails);
     else setPersonInfo(user);
   }, [userDetails, user]);
+
+  console.log(personInfo);
 
   useEffect(() => {
     dispatch(getUserById(userId))
@@ -57,7 +63,7 @@ const Profile = () => {
         dispatch(getPostsByUser(response.user.username));
       })
       .catch(() => {});
-  }, [userId]);
+  }, [userId, posts]);
 
   const checkIsFollowedByCurrentUser = () =>
     userDetails.following.some(
@@ -140,13 +146,13 @@ const Profile = () => {
                 <p>
                   <span className="font-bold">{userPosts?.length} </span>posts
                 </p>
-                <p>
+                <p onClick={() => setIsFollower(true)}>
                   <span className="font-bold">
                     {personInfo.followers?.length}{" "}
                   </span>
                   followers
                 </p>
-                <p>
+                <p onClick={() => setIsFollowing(true)}>
                   <span className="font-bold">
                     {personInfo.following?.length}{" "}
                   </span>
@@ -159,10 +165,12 @@ const Profile = () => {
                   {personInfo.firstName} {personInfo.lastName}
                 </p>
                 <p>{personInfo.bio}</p>
-                <div className="flex gap-2 items-center text-cyan-700">
-                  <BiLink size={15} />
-                  <a href={personInfo.website}>{personInfo.website}</a>
-                </div>
+                {personInfo.website && (
+                  <div className="flex gap-2 items-center text-cyan-700">
+                    <BiLink size={15} />
+                    <a href={personInfo.website}>{personInfo.website}</a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -172,10 +180,12 @@ const Profile = () => {
               {personInfo.firstName} {personInfo.lastName}
             </p>
             <p>{personInfo.bio}</p>
-            <div className="flex gap-2 items-center text-cyan-700">
-              <BiLink size={15} />
-              <a href={personInfo.website}>{personInfo.website}</a>
-            </div>
+            {personInfo.website && (
+              <div className="flex gap-2 items-center text-cyan-700">
+                <BiLink size={15} />
+                <a href={personInfo.website}>{personInfo.website}</a>
+              </div>
+            )}
           </div>
 
           <div className="w-11/12 flex justify-between sm:hidden text-center text-sm">
@@ -183,11 +193,11 @@ const Profile = () => {
               <p className="font-bold">{userPosts?.length}</p>
               <p>Posts</p>
             </div>
-            <div>
+            <div onClick={() => setIsFollower(true)}>
               <p className="font-bold">{personInfo.followers?.length}</p>
               <p>Followers</p>
             </div>
-            <div>
+            <div onClick={() => setIsFollowing(true)}>
               <p className="font-bold">{personInfo.following?.length}</p>
               <p>Following</p>
             </div>
@@ -220,8 +230,40 @@ const Profile = () => {
           </div>
         </div>
       )}
+      {isFollower && (
+        <ShowFollowUsers
+          title={"Followers"}
+          users={personInfo.followers}
+          closePopup={() => setIsFollower(false)}
+        />
+      )}
+      {isFollowing && (
+        <ShowFollowUsers
+          title={"Following"}
+          users={personInfo.following}
+          closePopup={() => setIsFollowing(false)}
+        />
+      )}
       <Header />
       <BottomNav />
+    </div>
+  );
+};
+
+const ShowFollowUsers = ({ title, users, closePopup }) => {
+  return (
+    <div className="absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center bg-gray-900/[.30]">
+      <div className="w-11/12 sm:w-4/12 flex flex-col justify-center gap-4 bg-white rounded-lg p-5">
+        <div className="flex justify-between mb-4" onClick={() => closePopup()}>
+          <p className="font-semibold">{title}</p>
+          <RxCross1 size={20} />
+        </div>
+        {users.length ? (
+          users?.map((user) => <UserSuggestion user={user} key={user._id} />)
+        ) : (
+          <p>No {title} yet.</p>
+        )}
+      </div>
     </div>
   );
 };
