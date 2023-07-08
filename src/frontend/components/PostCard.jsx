@@ -24,7 +24,8 @@ const PostCard = ({ post }) => {
   const { userDetails } = useSelector((state) => state.authReducer);
   const { users } = useSelector((state) => state.userReducer);
   const { bookmarks } = useSelector((state) => state.postReducer);
-  const { username, artImage, content, likes, createdAt, userId } = post;
+  const { username, artImage, artVideo, content, likes, createdAt, userId } =
+    post;
 
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -83,7 +84,12 @@ const PostCard = ({ post }) => {
         )}
       </div>
       <div onClick={() => navigate(`/post/${post._id}`)}>
-        <img src={artImage} alt="" />
+        {artImage?.length ? <img src={artImage} alt="" /> : null}
+        {artVideo?.length ? (
+          <video controls>
+            <source src={artVideo} type="video/mp4" />
+          </video>
+        ) : null}
       </div>
       <p className="py-3">{content}</p>
       <div className="flex justify-between items-center">

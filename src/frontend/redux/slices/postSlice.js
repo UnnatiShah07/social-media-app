@@ -155,6 +155,10 @@ export const getPostById = createAsyncThunk(
 export const postSlice = createSlice({
   name: "post",
   initialState,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   reducers: {
     updateShowAddPost: (state, action) => {
       state.showAddPost = action.payload;

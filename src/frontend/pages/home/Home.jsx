@@ -66,7 +66,9 @@ const Home = () => {
         </div>
         <div className="w-full sm:w-9/12 h-screen mt-5 sm:mt-0 sm:pt-10 flex flex-col items-center gap-5 overflow-auto hide-scrollbar">
           <div className="w-11/12 sm:w-6/12 flex justify-between items-center">
-            <p>Latest Posts</p>
+            <p>
+              {filterPostType === "latest" ? "Latest Posts" : "Trending Posts"}
+            </p>
             <div
               className="relative"
               onClick={() => dispatch(updateShowFilterPost(!showFilterPost))}

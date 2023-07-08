@@ -105,9 +105,13 @@ export const posts = [
   },
   {
     _id: "1d83464a-165a-4002-bb30-c6f1419ae746",
-    content: "Handmade polymer clay earrings",
-    artImage:
-      "https://i.etsystatic.com/8440299/r/il/db836f/2991092446/il_794xN.2991092446_tbpz.jpg",
+    content: "Lighting your life with magic of hope...",
+    // artImage:
+    //   "https://i.etsystatic.com/8440299/r/il/db836f/2991092446/il_794xN.2991092446_tbpz.jpg",
+    // artVideo:
+    //   "https://res.cloudinary.com/dtwlwrjyj/video/upload/v1688750270/n4otpvin9ozpechybmtu.mp4",
+    artVideo:
+      "https://res.cloudinary.com/dtwlwrjyj/video/upload/v1688749137/e62zdigfj0yci1s9youo.mp4",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -116,8 +120,8 @@ export const posts = [
     username: "unnati_shah",
     userId: "1fb42ec4-d0a9-4ef3-b5f5-1cd8fca836f7",
     comments: [],
-    createdAt: dayjs().subtract(70, "day"),
-    updatedAt: dayjs().subtract(70, "day"),
+    createdAt: dayjs().subtract(75, "day"),
+    updatedAt: dayjs().subtract(75, "day"),
   },
   {
     _id: "a0eee344-13f6-481f-a8ea-a3a581f97c4c",

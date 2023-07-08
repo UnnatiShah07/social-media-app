@@ -55,7 +55,7 @@ const SidebarNav = () => {
         >
           <div
             className={`w-10 h-10 rounded-3xl border bg-slate-200 ${
-              isMyProfile && "border border-primary"
+              isMyProfile ? "border border-primary" : ""
             }`}
           >
             <img
@@ -67,7 +67,7 @@ const SidebarNav = () => {
               className="object-cover w-full h-full rounded-3xl"
             />
           </div>
-          <p className={isMyProfile && "text-primary font-medium"}>
+          <p className={isMyProfile ? "text-primary font-medium" : ""}>
             {userDetails.firstName} {userDetails.lastName}
           </p>
         </div>

@@ -11,6 +11,8 @@ import {
 } from "../../components";
 import { setShowUserSuggestion } from "../../redux";
 import { RxCross1 } from "react-icons/rx";
+import { useEffect, useRef, useState } from "react";
+import { loader } from "../../assets";
 
 const Explore = () => {
   const dispatch = useDispatch();
@@ -18,7 +20,40 @@ const Explore = () => {
     (state) => state.postReducer
   );
   const { showUserSuggestion } = useSelector((state) => state.userReducer);
-  // const categoryStyle = "border border-primary py-1 px-3 rounded-3xl text-sm font-medium";
+  const [postData, setPostData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [dataLoading, setDataLoading] = useState(false);
+  const obseverRef = useRef();
+
+  useEffect(() => {
+    console.log("called useEffect");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          mergeData();
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (obseverRef.current) observer.observe(obseverRef.current);
+
+    return () => {
+      if (obseverRef.current) observer.unobserve(obseverRef.current);
+    };
+  }, [obseverRef, page]);
+
+  const mergeData = () => {
+    if (page <= 3) {
+      setDataLoading(true);
+      setTimeout(() => {
+        const data = posts.slice(0, page * 4);
+        setPostData(data);
+        setPage((page) => page + 1);
+        setDataLoading(false);
+      }, 1000);
+    }
+  };
 
   return (
     <div className="sm:flex min-h-screen">
@@ -27,19 +62,17 @@ const Explore = () => {
           <SidebarNav />
         </div>
         <div className="w-full sm:w-9/12 h-screen mt-5 sm:mt-0 sm:pt-10 flex flex-col items-center gap-5 overflow-auto hide-scrollbar">
-          {/* <div className="w-11/12 sm:w-12/12 flex justify-between items-center">
-            <p className={categoryStyle}>Embroidery Art</p>
-            <p className={categoryStyle}>Lippan Mirror Art</p>
-            <p className={categoryStyle}>Mandala Art</p>
-            <p className={categoryStyle}>Clay Earing Art</p>
-          </div> */}
           <div className="w-full flex flex-col items-center gap-7 pb-10 sm:pb-0">
-            {posts.map((post, index) => (
+            {postData.map((post, index) => (
               <>
                 <PostCard post={post} key={post.id} />
                 <div className="border w-11/12 sm:w-6/12"></div>
               </>
             ))}
+            <div ref={obseverRef}></div>
+            {dataLoading && (
+              <img src={loader} alt="loader" className="h-16 w-16" />
+            )}
           </div>
         </div>
         <div className="sm:w-4/12 h-full hidden sm:block px-8">
@@ -59,6 +92,7 @@ const Explore = () => {
           </div>
         </div>
       )}
+
       <Header />
       <BottomNav />
     </div>

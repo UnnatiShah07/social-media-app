@@ -27,7 +27,7 @@ const Bookmark = () => {
 
   useEffect(() => {
     const newBookmarks = bookmarks.map((bookmark) =>
-      posts.find((post) => post._id === bookmark)
+      posts.find((post) => post._id === bookmark._id)
     );
     setBookmarkPosts(newBookmarks);
   }, [bookmarks, posts]);
@@ -43,7 +43,7 @@ const Bookmark = () => {
             {bookmarkPosts.length ? (
               bookmarkPosts.map((post, index) => (
                 <>
-                  <PostCard post={post} key={post._id} />
+                  <PostCard post={post} key={post?._id} />
                   <div className="border w-11/12 sm:w-6/12"></div>
                 </>
               ))

@@ -54,8 +54,6 @@ const Profile = () => {
     else setPersonInfo(user);
   }, [userDetails, user]);
 
-  console.log(personInfo);
-
   useEffect(() => {
     dispatch(getUserById(userId))
       .unwrap()
