@@ -53,12 +53,16 @@ const Home = () => {
         </div>
       </div>
       <div className="w-full flex flex-col items-center gap-7 pb-10 sm:pb-0">
-        {filterPost.map((post, index) => (
-          <>
-            <PostCard post={post} key={post._id} />
-            <div className="border w-11/12 sm:w-6/12"></div>
-          </>
-        ))}
+        {filterPost.length ? (
+          filterPost.map((post, index) => (
+            <>
+              <PostCard post={post} key={post._id} />
+              <div className="border w-11/12 sm:w-6/12"></div>
+            </>
+          ))
+        ) : (
+          <p>No posts</p>
+        )}
       </div>
     </PageLayout>
   );

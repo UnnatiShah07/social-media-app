@@ -52,13 +52,13 @@ const SignUp = () => {
               <div className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="Full name"
+                  placeholder="First name"
                   value={values.firstName}
                   onChange={handleChange("firstName")}
                 />
                 <input
                   type="text"
-                  placeholder="Full name"
+                  placeholder="Last name"
                   value={values.lastName}
                   onChange={handleChange("lastName")}
                 />
