@@ -24,7 +24,8 @@ const PostCard = ({ post }) => {
   const { userDetails } = useSelector((state) => state.authReducer);
   const { users } = useSelector((state) => state.userReducer);
   const { bookmarks } = useSelector((state) => state.postReducer);
-  const { username, artImage, content, likes, createdAt, userId } = post;
+  const { username, artImage, artVideo, content, likes, createdAt, userId } =
+    post;
 
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -36,7 +37,7 @@ const PostCard = ({ post }) => {
     );
     setIsLiked(isLikedByCurrentUser);
     const isBookmarkedByCurrentUser = bookmarks.some(
-      (bookmarkPostId) => bookmarkPostId === post._id
+      ({ _id }) => _id === post._id
     );
     setIsBookmarked(isBookmarkedByCurrentUser);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,8 +83,13 @@ const PostCard = ({ post }) => {
           </div>
         )}
       </div>
-      <div onClick={() => navigate(`/post/${post._id}`)}>
-        <img src={artImage} alt="" />
+      <div className="self-center bg-red-300" onClick={() => navigate(`/post/${post._id}`)}>
+        {artImage?.length ? <img src={artImage} className="object-cover" alt="" /> : null}
+        {artVideo?.length ? (
+          <video controls>
+            <source src={artVideo} type="video/mp4" />
+          </video>
+        ) : null}
       </div>
       <p className="py-3">{content}</p>
       <div className="flex justify-between items-center">

@@ -12,3 +12,4 @@ export { default as AddPostModal } from "./AddPostModal";
 export { default as EditDeletePopup } from "./EditDeletePopup";
 export { default as EditProfile } from "./EditProfile";
 export { default as FilterPostPopup } from "./FilterPostPopup";
+export { default as PageLayout } from "./PageLayout";

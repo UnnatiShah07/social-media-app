@@ -64,9 +64,9 @@ export const users = [
   },
   {
     _id: "d0aa201c-d82d-4bfc-a427-7ffe4f8cc5a1",
-    firstName: "Nilesh",
-    lastName: "Mishara",
-    username: "nilesh_mishara",
+    firstName: "Ashish",
+    lastName: "Bagrecha",
+    username: "ashish_bagrecha",
     profile_image:
       "https://www.pngall.com/wp-content/uploads/12/Boy-PNG-Images.png",
     password: "12345678",
