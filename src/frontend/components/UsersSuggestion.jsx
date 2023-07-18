@@ -31,7 +31,7 @@ const UserSuggestion = ({ user }) => {
       .catch(() => {});
 
   return (
-    <div className="mb-5 flex justify-between items-center">
+    <div className="mb-5 flex justify-between items-center cursor-pointer">
       <div
         className="flex items-center"
         onClick={() => navigate(`/profile/${user._id}`)}

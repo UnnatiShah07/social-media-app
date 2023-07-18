@@ -4,7 +4,7 @@ const NavbarItem = (props) => {
   return (
     <div onClick={onClick}>
       <p
-        className={`flex gap-4 items-center py-3  ${
+        className={`flex gap-4 items-center py-3 cursor-pointer  ${
           isActive && "text-primary font-medium"
         }`}
       >

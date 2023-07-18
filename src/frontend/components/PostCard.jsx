@@ -63,7 +63,7 @@ const PostCard = ({ post }) => {
           onClick={() => navigate(`/profile/${userId}`)}
         >
           <img
-            className="w-10 h-10 rounded-3xl bg-slate-200"
+            className="w-10 h-10 rounded-3xl bg-slate-200 cursor-pointer"
             src={
               userDetails.username === username
                 ? userDetails.profile_image
@@ -75,7 +75,7 @@ const PostCard = ({ post }) => {
           <p className="font-semibold">{username}</p>
         </div>
         {userDetails.username === username && (
-          <div>
+          <div className="cursor-pointer">
             <HiOutlineDotsHorizontal
               size={20}
               onClick={() => setIsShowEditDelete(!isShowEditDelete)}
@@ -94,7 +94,7 @@ const PostCard = ({ post }) => {
       <p className="py-3">{content}</p>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div onClick={handleLikeDislike}>
+          <div onClick={handleLikeDislike} className="cursor-pointer">
             {isLiked ? (
               <HiHeart size={25} color="#ff3040" />
             ) : (
@@ -104,9 +104,10 @@ const PostCard = ({ post }) => {
           <FaRegComment
             size={22}
             onClick={() => navigate(`/post/${post._id}`)}
+            className="cursor-pointer"
           />
         </div>
-        <div onClick={handleBookmark}>
+        <div onClick={handleBookmark} className="cursor-pointer">
           {isBookmarked ? (
             <RiBookmarkFill size={22} />
           ) : (
