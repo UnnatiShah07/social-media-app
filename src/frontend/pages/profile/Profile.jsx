@@ -120,7 +120,7 @@ const Profile = () => {
               </button>
             )}
             {isLoginUser && (
-              <div onClick={handleLogout}>
+              <div onClick={handleLogout} className="cursor-pointer">
                 <FiLogOut size={20} />
               </div>
             )}
@@ -130,11 +130,11 @@ const Profile = () => {
             <p>
               <span className="font-bold">{userPosts?.length} </span>posts
             </p>
-            <p onClick={() => setIsFollower(true)}>
+            <p onClick={() => setIsFollower(true)} className="cursor-pointer">
               <span className="font-bold">{personInfo.followers?.length} </span>
               followers
             </p>
-            <p onClick={() => setIsFollowing(true)}>
+            <p onClick={() => setIsFollowing(true)} className="cursor-pointer">
               <span className="font-bold">{personInfo.following?.length} </span>
               following
             </p>
@@ -173,11 +173,11 @@ const Profile = () => {
           <p className="font-bold">{userPosts?.length}</p>
           <p>Posts</p>
         </div>
-        <div onClick={() => setIsFollower(true)}>
+        <div onClick={() => setIsFollower(true)} className="cursor-pointer">
           <p className="font-bold">{personInfo.followers?.length}</p>
           <p>Followers</p>
         </div>
-        <div onClick={() => setIsFollowing(true)}>
+        <div onClick={() => setIsFollowing(true)} className="cursor-pointer">
           <p className="font-bold">{personInfo.following?.length}</p>
           <p>Following</p>
         </div>

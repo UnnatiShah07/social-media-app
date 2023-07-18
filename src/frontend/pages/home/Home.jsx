@@ -45,7 +45,7 @@ const Home = () => {
       <div className="w-11/12 sm:w-6/12 flex justify-between items-center">
         <p>{filterPostType === "latest" ? "Latest Posts" : "Trending Posts"}</p>
         <div
-          className="relative"
+          className="relative cursor-pointer"
           onClick={() => dispatch(updateShowFilterPost(!showFilterPost))}
         >
           <VscSettings size={20} />

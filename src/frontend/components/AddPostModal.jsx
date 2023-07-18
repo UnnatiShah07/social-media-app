@@ -1,7 +1,7 @@
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { updateShowAddPost, uploadPost, editPost } from "../redux";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 import dayjs from "dayjs";
 import { FaImage } from "react-icons/fa";
@@ -18,6 +18,11 @@ const AddPostModal = () => {
   );
   const [isPosting, setIsPosting] = useState(false);
   const fileRef = useRef();
+
+  useEffect(() => {
+    console.log(postData);
+    setPostImage(postData.artImage || postData.artVideo);
+  }, [postData]);
 
   const handleUploadPost = async () => {
     setIsPosting(true);
@@ -55,8 +60,6 @@ const AddPostModal = () => {
     dispatch(uploadPost(postObj));
   };
 
-  console.log(postImage, "from >>>>");
-
   const handleEditPost = (media) => {
     let postObj = {
       ...postData,
@@ -64,6 +67,10 @@ const AddPostModal = () => {
       createdAt: dayjs().format("MMM D, YYYY h:mm A"),
       updatedAt: dayjs().format("MMM D, YYYY h:mm A"),
     };
+    if (!Object.keys(postImage)?.length || !postImage?.length) {
+      postObj["artImage"] = "";
+      postObj["artVideo"] = "";
+    }
     if (media?.image?.url && media?.image) {
       postObj["artImage"] = media.image.url;
       postObj["artVideo"] = "";
@@ -72,7 +79,6 @@ const AddPostModal = () => {
       postObj["artImage"] = "";
       postObj["artVideo"] = media.video.url;
     }
-    console.log(postObj, "postObj");
     dispatch(editPost(postObj));
   };
 
@@ -99,6 +105,24 @@ const AddPostModal = () => {
 
   const getImageURL = () =>
     typeof postImage === "string" ? postImage : URL.createObjectURL(postImage);
+
+  const isImage = () => {
+    if (postImage?.type?.includes("image")) return true;
+    else {
+      if (typeof postImage === "string") {
+        if (postImage?.includes("jpg")) return true;
+        else if (postImage?.includes("png")) return true;
+        else if (postImage?.includes("jpeg")) return true;
+        else return false;
+      } else return false;
+    }
+  };
+
+  const isVideo = () =>
+    postImage?.type?.includes("video") ||
+    (typeof postImage === "string" && postImage?.includes("mp4"));
+
+  console.log(postImage, isImage(), isVideo());
 
   return (
     <div className="absolute top-0 bottom-0 right-0 left-0 bg-black/50 flex justify-center items-center">
@@ -133,12 +157,10 @@ const AddPostModal = () => {
               ref={fileRef}
               onChange={() => setPostImage(fileRef.current.files[0])}
             />
-            <label htmlFor="post-image">
+            <label htmlFor="post-image" className="cursor-pointer">
               <FaImage size={20} />
             </label>
-            {postImage?.type?.includes("image") ||
-            (typeof postImage === "string" &&
-              postImage?.includes("jpg" || "png" || "jpeg")) ? (
+            {isImage() ? (
               <div className="w-6/12 h-6/12 rounded-lg relative">
                 <img
                   src={getImageURL()}

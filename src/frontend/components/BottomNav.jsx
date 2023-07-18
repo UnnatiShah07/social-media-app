@@ -11,35 +11,35 @@ const BottomNav = () => {
   const location = useLocation();
   const { userDetails } = useSelector((state) => state.authReducer);
 
+  const getColorByRoute = (routeName) =>
+    `cursor-pointer ${
+      location.pathname === routeName ? "text-primary" : "text-font-color"
+    }`;
+
   return (
     <div className="fixed bottom-0 right-0 left-0 border bg-slate-50 h-12 sm:hidden flex justify-between items-center px-5">
       <AiFillHome
         size={25}
         onClick={() => navigate("/")}
-        className={
-          location.pathname === "/" ? "text-primary" : "text-font-color"
-        }
+        className={getColorByRoute("/")}
       />
       <MdExplore
         size={25}
         onClick={() => navigate("/explore")}
-        className={
-          location.pathname === "/explore" ? "text-primary" : "text-font-color"
-        }
+        className={getColorByRoute("/explore")}     
       />
       <RiAddCircleFill
         size={25}
         onClick={() => dispatch(updateShowAddPost(true))}
+        className="cursor-pointer"
       />
       <MdOutlineBookmark
         size={25}
         onClick={() => navigate("/bookmark")}
-        className={
-          location.pathname === "/bookmark" ? "text-primary" : "text-font-color"
-        }
+        className={getColorByRoute("/bookmark")}
       />
       <div
-        className={`h-7 w-7 rounded-3xl bg-slate-300 ${
+        className={`cursor-pointer h-7 w-7 rounded-3xl bg-slate-300 ${
           location.pathname === `/profile/${userDetails._id}` &&
           "border border-primary"
         }`}

@@ -11,6 +11,7 @@ const Header = () => {
       <BiSearch
         size={22}
         onClick={() => dispatch(setShowUserSuggestion(true))}
+        className="cursor-pointer"
       />
     </div>
   );
